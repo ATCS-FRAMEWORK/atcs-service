@@ -2,10 +2,16 @@ name: Build ATCS Service
 on: [push]
 jobs:
   build:
-    runs-on: ubuntu-latest
     strategy:
       matrix:
-        target: [x86_64-unknown-linux-musl, x86_64-pc-windows-gnu]
+        include:
+          - os: ubuntu-latest
+            target: x86_64-unknown-linux-musl
+          - os: ubuntu-latest
+            target: x86_64-pc-windows-gnu
+          - os: macos-latest
+            target: aarch64-apple-darwin
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
       - name: Install Rust
@@ -22,3 +28,4 @@ jobs:
         with:
           name: atcs-service-${{ matrix.target }}
           path: target/${{ matrix.target }}/release/atcs-service
+
