@@ -1,7 +1,5 @@
-name: Build ATCS Enterprise
-
+name: Build ATCS Service
 on: [push]
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -14,7 +12,7 @@ jobs:
         uses: dtolnay/rust-toolchain@stable
         with:
           targets: ${{ matrix.target }}
-      - name: Install musl tools (Linux)
+      - name: Install musl tools
         if: matrix.target == 'x86_64-unknown-linux-musl'
         run: sudo apt-get install -y musl-tools
       - name: Build
@@ -22,5 +20,5 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: atcs-enterprise-${{ matrix.target }}
-          path: target/${{ matrix.target }}/release/atcs-enterprise
+          name: atcs-service-${{ matrix.target }}
+          path: target/${{ matrix.target }}/release/atcs-service
