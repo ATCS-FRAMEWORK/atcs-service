@@ -1,0 +1,72 @@
+{
+  "title": "BRAPI OPS - Sistema Vivo",
+  "uid": "brapi-ops-v1",
+  "timezone": "browser",
+  "schemaVersion": 38,
+  "refresh": "1s",
+  "style": "dark",
+  "time": { "from": "now-5m", "to": "now" },
+  "panels": [
+    {
+      "type": "stat",
+      "title": "RAM %",
+      "gridPos": { "h": 4, "w": 4, "x": 0, "y": 0 },
+      "targets": [{ "expr": "brapi_ram_used_percent" }],
+      "options": { "colorMode": "background", "graphMode": "area", "textMode": "auto" },
+      "fieldConfig": { "defaults": { "color": { "mode": "fixed", "fixedColor": "#39ff14" }, "unit": "percent", "thresholds": { "mode": "absolute", "steps": [{ "color": "green", "value": null }, { "color": "red", "value": 90 }] } } }
+    },
+    {
+      "type": "stat",
+      "title": "CPU %",
+      "gridPos": { "h": 4, "w": 4, "x": 4, "y": 0 },
+      "targets": [{ "expr": "brapi_cpu_usage_percent" }],
+      "options": { "colorMode": "background", "graphMode": "area", "textMode": "auto" },
+      "fieldConfig": { "defaults": { "color": { "mode": "fixed", "fixedColor": "#00f3ff" }, "unit": "percent", "thresholds": { "mode": "absolute", "steps": [{ "color": "cyan", "value": null }, { "color": "red", "value": 85 }] } } }
+    },
+    {
+      "type": "stat",
+      "title": "Temperatura",
+      "gridPos": { "h": 4, "w": 4, "x": 8, "y": 0 },
+      "targets": [{ "expr": "brapi_cpu_temp_celsius" }],
+      "options": { "colorMode": "background", "graphMode": "area", "textMode": "auto" },
+      "fieldConfig": { "defaults": { "color": { "mode": "fixed", "fixedColor": "#ff00ff" }, "unit": "celsius", "thresholds": { "mode": "absolute", "steps": [{ "color": "purple", "value": null }, { "color": "red", "value": 60 }] } } }
+    },
+    {
+      "type": "stat",
+      "title": "Disco %",
+      "gridPos": { "h": 4, "w": 4, "x": 12, "y": 0 },
+      "targets": [{ "expr": "brapi_disk_used_percent" }],
+      "options": { "colorMode": "background", "graphMode": "area", "textMode": "auto" },
+      "fieldConfig": { "defaults": { "color": { "mode": "fixed", "fixedColor": "#bc13fe" }, "unit": "percent", "thresholds": { "mode": "absolute", "steps": [{ "color": "purple", "value": null }, { "color": "red", "value": 90 }] } } }
+    },
+    {
+      "type": "stat",
+      "title": "SLA %",
+      "gridPos": { "h": 4, "w": 4, "x": 16, "y": 0 },
+      "targets": [{ "expr": "brapi_sla_percent" }],
+      "options": { "colorMode": "background", "graphMode": "area", "textMode": "auto" },
+      "fieldConfig": { "defaults": { "color": { "mode": "fixed", "fixedColor": "#ffd700" }, "unit": "percent", "thresholds": { "mode": "absolute", "steps": [{ "color": "red", "value": null }, { "color": "gold", "value": 99 }] } } }
+    },
+    {
+      "type": "timeseries",
+      "title": "Tendência de Hardware",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 4 },
+      "targets": [
+        { "expr": "brapi_ram_used_percent", "legendFormat": "RAM" },
+        { "expr": "brapi_cpu_usage_percent", "legendFormat": "CPU" },
+        { "expr": "brapi_disk_used_percent", "legendFormat": "Disco" }
+      ],
+      "fieldConfig": { "defaults": { "custom": { "lineWidth": 3, "fillOpacity": 20, "gradientMode": "opacity", "showPoints": "never" } } }
+    },
+    {
+      "type": "timeseries",
+      "title": "Saúde do Sistema",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 4 },
+      "targets": [
+        { "expr": "brapi_processes_count", "legendFormat": "Processos" },
+        { "expr": "brapi_ticks_total", "legendFormat": "Ticks" }
+      ],
+      "fieldConfig": { "defaults": { "custom": { "lineWidth": 2, "fillOpacity": 10 } } }
+    }
+  ]
+}

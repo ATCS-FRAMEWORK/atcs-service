@@ -1,0 +1,6 @@
+target/
+config.env
+*.pcap
+*.log
+brapi_backup.sql
+*.tar.gz
